@@ -8,6 +8,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -15,9 +18,19 @@ import edu.wpi.first.wpilibj.XboxController;
  */
 public class OI {
   public XboxController xbox;
+
+  public JoystickButton raiseElevator;
+  public JoystickButton lowerElevator;
 	
 	public OI() {
 		xbox = new XboxController(0);
-		
+
+		raiseElevator = new JoystickButton(xbox, 5);
+		raiseElevator.whileHeld(new RaiseElevatorManual());
+		lowerElevator = new JoystickButton(xbox, 6);
+		lowerElevator.whileHeld(new LowerElevatorManual());
+
+		SmartDashboard.putData("Test Encoder", new TestEncoder());
+
 	}
 }

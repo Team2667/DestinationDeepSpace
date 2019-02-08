@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import com.revrobotics.*;
 
 
 /**
@@ -29,7 +30,77 @@ public class RobotMap {
 	public static DifferentialDrive driveTrain;
 	public static SpeedControllerGroup left;
 	public static SpeedControllerGroup right;
+
+	public static CANSparkMax elevatorMax = new CANSparkMax(5, CANSparkMaxLowLevel.MotorType.kBrushless);
+	public static CANPIDController elevatorController = elevatorMax.getPIDController();
+
+	private static final boolean kDiscontinuityPresent = true;
+	final static int kBookEnd_0 = 910;		/* 80 deg */
+	final static int kBookEnd_1 = 1137;	/* 100 deg */
+	final static int kTimeoutMs = 30;
+
+	public static double pulseWidthWithoutOverflowsLF;
+	public static double pulseWidthWithoutOverflowsLR;
+	public static double pulseWidthWithoutOverflowsRF;
+	public static double pulseWidthWithoutOverflowsRR;
+	
+	public static double rotLF = 0;
+	public static double rotLR = 0;
+	public static double rotRF = 0;
+	public static double rotRR = 0;
+	
 	// Other Things
+	public static void initQuadrature(WPI_TalonSRX talon) {
+		/* get the absolute pulse width position */
+		int pulseWidth = talon.getSensorCollection().getPulseWidthPosition();
+
+		/**
+		 * If there is a discontinuity in our measured range, subtract one half
+		 * rotation to remove it
+		 */
+		if (kDiscontinuityPresent) {
+
+			/* Calculate the center */
+			int newCenter;
+			newCenter = (kBookEnd_0 + kBookEnd_1) / 2;
+			newCenter &= 0xFFF;
+
+			/**
+			 * Apply the offset so the discontinuity is in the unused portion of
+			 * the sensor
+			 */
+			pulseWidth -= newCenter; 
+			
+		/**
+		 * Mask out the bottom 12 bits to normalize to [0,4095],
+		 * or in other words, to stay within [0,360) degrees 
+		 */
+		pulseWidth = pulseWidth & 0xFFF;
+
+		/* Update Quadrature position */
+		talon.getSensorCollection().setQuadraturePosition(pulseWidth, kTimeoutMs);
+	}
+
+		}
+
+		public double ToDeg(int units) {
+			double deg = units * 360.0 / 4096.0;
+	
+			/* truncate to 0.1 res */
+			deg *= 10;
+			deg = (int) deg;
+			deg /= 10;
+	
+			return deg;
+		}
+
+		public static void EncoderCounter() {
+			pulseWidthWithoutOverflowsLF = RobotMap.driveTrainLeftFront.getSensorCollection().getPulseWidthPosition() & 0xFFF;
+    		pulseWidthWithoutOverflowsLR = RobotMap.driveTrainLeftRear.getSensorCollection().getPulseWidthPosition() & 0xFFF;
+    		pulseWidthWithoutOverflowsRF = RobotMap.driveTrainRightFront.getSensorCollection().getPulseWidthPosition() & 0xFFF;
+			pulseWidthWithoutOverflowsRR = RobotMap.driveTrainRightRear.getSensorCollection().getPulseWidthPosition() & 0xFFF;
+		}
+
 		public static void init() {
 			// Assigning numbers to parts
 			driveTrainLeftFront.set(ControlMode.PercentOutput, 1);
@@ -44,5 +115,10 @@ public class RobotMap {
 			right = new SpeedControllerGroup(driveTrainRightFront, driveTrainRightRear);
 			// Making it a differential drive
 			driveTrain = new DifferentialDrive(left, right);
+			// Encoder Stuff
+			initQuadrature(driveTrainLeftFront);
+			initQuadrature(driveTrainLeftRear);
+			initQuadrature(driveTrainRightFront);
+			initQuadrature(driveTrainRightRear);
 		}
 }
