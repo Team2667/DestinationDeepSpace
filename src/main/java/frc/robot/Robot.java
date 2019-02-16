@@ -12,8 +12,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.*;
 /**
@@ -24,11 +22,13 @@ import frc.robot.subsystems.*;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static OI m_oi;
   public static DriveTrain m_drive;
   public static Elevator m_lift;
   public static Pivot m_pivot;
+  public static PanelRelease m_panel;
+  public static Wrist m_wrist;
+  public static Stabby m_stabby;
   
 
   Command m_autonomousCommand;
@@ -41,14 +41,15 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     RobotMap.init();
-
+    //Put All Subsystem that ARE NOT Drive Train Above OI, Put Drive Train BELOW OI
+    m_stabby = new Stabby();
+    m_wrist = new Wrist();
+    m_panel = new PanelRelease();
+    m_pivot = new Pivot();
     m_lift = new Elevator();
     m_oi = new OI();
     m_drive = new DriveTrain();
-    m_pivot = new Pivot();
 
-
-    m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
   }
@@ -122,6 +123,7 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
+    
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
@@ -133,6 +135,9 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     ///RobotMap.EncoderCounter();
+    SmartDashboard.putNumber("Elevator Position", m_lift.getPos());
+    SmartDashboard.putNumber("Pivot Position", m_pivot.getPos());
+    SmartDashboard.putNumber("Stabby Position", m_pivot.getPos());
     Scheduler.getInstance().run();
   }
 

@@ -21,6 +21,8 @@ public class OI {
 
   public JoystickButton raiseElevator;
   public JoystickButton lowerElevator;
+  public JoystickButton stab;
+  public JoystickButton unStab;
 	
 	public OI() {
 		xbox = new XboxController(0);
@@ -30,7 +32,18 @@ public class OI {
 		lowerElevator = new JoystickButton(xbox, 6);
 		lowerElevator.whileHeld(new LowerElevatorManual());
 
+		stab = new JoystickButton(xbox, 1);
+		stab.whileHeld(new StabbyManualStab());
+		unStab = new JoystickButton(xbox, 2);
+		unStab.whileHeld(new StabbyManualUnstab());
+
+
 		SmartDashboard.putData("Test Encoder", new TestEncoder());
+		SmartDashboard.putData("ElevatorNext", new ElevatorNext());
+		SmartDashboard.putData("ElevatorPrev", new ElevatorPrev());
+		SmartDashboard.putData("Reset Spark Max Encoders", new ResetSparkEncoders());
+		
+
 
 	}
 }

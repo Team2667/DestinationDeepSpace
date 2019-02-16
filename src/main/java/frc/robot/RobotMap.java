@@ -13,6 +13,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import com.revrobotics.*;
+import edu.wpi.first.wpilibj.Servo;
 
 
 /**
@@ -23,16 +24,18 @@ import com.revrobotics.*;
  */
 public class RobotMap {
   
+	// These should be moved to the DriveTrain subsystem
 	public static WPI_TalonSRX driveTrainLeftFront = new WPI_TalonSRX(1);
 	public static WPI_TalonSRX driveTrainLeftRear = new WPI_TalonSRX(2);
 	public static WPI_TalonSRX driveTrainRightFront = new WPI_TalonSRX(3);
 	public static WPI_TalonSRX driveTrainRightRear = new WPI_TalonSRX(4);
-	public static DifferentialDrive driveTrain;
+	public static DifferentialDrive driveTrain;	
 	public static SpeedControllerGroup left;
 	public static SpeedControllerGroup right;
 
-	public static CANSparkMax elevatorMax = new CANSparkMax(5, CANSparkMaxLowLevel.MotorType.kBrushless);
-	public static CANPIDController elevatorController = elevatorMax.getPIDController();
+	// These should be moved to the elevator sysbsystem
+
+//	public static Servo wristServo = new Servo(5);
 
 	private static final boolean kDiscontinuityPresent = true;
 	final static int kBookEnd_0 = 910;		/* 80 deg */

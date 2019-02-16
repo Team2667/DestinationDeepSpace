@@ -7,7 +7,6 @@
 
 package frc.robot.commands;
 
-import com.revrobotics.*;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -22,7 +21,7 @@ public class TestEncoder extends Command {
   protected void initialize() {
   //  RobotMap.elevatorController.setOutputRange(-1,1);
   //  RobotMap.elevatorController.setReference(360, ControlType.kPosition);
-    RobotMap.elevatorMax.set(.5);
+ //   RobotMap.elevatorMax.set(.5);
     
   }
 
