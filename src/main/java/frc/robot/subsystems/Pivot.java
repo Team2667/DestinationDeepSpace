@@ -18,7 +18,7 @@ public class Pivot extends Subsystem {
         PIDData[] array = new PIDData[3];
         array[0] = new PIDData(0);
         array[1] = new PIDData(30); 
-        array[2] = new PIDData (100);
+        array[2] = new PIDData (-48.5);
 
         posData = new PIDSubsystemPositions(array);
         pivotEncoder.setPosition(0.0);

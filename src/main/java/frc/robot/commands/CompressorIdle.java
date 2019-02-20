@@ -10,9 +10,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class PivotReverseManual extends Command {
-  public PivotReverseManual() {
-    requires(Robot.m_pivot);
+public class CompressorIdle extends Command {
+  public CompressorIdle() {
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
+    requires(Robot.m_panel);
   }
 
   // Called just before this Command runs the first time
@@ -23,7 +25,6 @@ public class PivotReverseManual extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_pivot.lowerIndef(.5);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -35,13 +36,11 @@ public class PivotReverseManual extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_pivot.stop();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    end();
   }
 }

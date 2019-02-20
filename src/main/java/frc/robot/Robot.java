@@ -44,7 +44,7 @@ public class Robot extends TimedRobot {
     //Put All Subsystem that ARE NOT Drive Train Above OI, Put Drive Train BELOW OI
     m_stabby = new Stabby();
     m_wrist = new Wrist();
-    m_panel = new PanelRelease();
+    //m_panel = new PanelRelease();
     m_pivot = new Pivot();
     m_lift = new Elevator();
     m_oi = new OI();
@@ -137,7 +137,7 @@ public class Robot extends TimedRobot {
     ///RobotMap.EncoderCounter();
     SmartDashboard.putNumber("Elevator Position", m_lift.getPos());
     SmartDashboard.putNumber("Pivot Position", m_pivot.getPos());
-    SmartDashboard.putNumber("Stabby Position", m_pivot.getPos());
+    SmartDashboard.putNumber("Stabby Position", m_stabby.getPos());
     Scheduler.getInstance().run();
   }
 

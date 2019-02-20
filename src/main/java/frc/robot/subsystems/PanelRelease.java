@@ -18,10 +18,14 @@ public class PanelRelease extends Subsystem {
   
   public DoubleSolenoid topSol = new DoubleSolenoid(1, 2);
   public DoubleSolenoid botSol = new DoubleSolenoid(3, 4);
-  public Compressor control = new Compressor(0);
+  public Compressor control = new Compressor(8);
 
   public PanelRelease() {
     control.setClosedLoopControl(true);
+  }
+  
+  public void setClosedLoopControl(boolean val)  {
+    control.setClosedLoopControl(val);
   }
 
   public void forwardTop() {

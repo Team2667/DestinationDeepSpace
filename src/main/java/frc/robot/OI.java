@@ -23,6 +23,9 @@ public class OI {
   public JoystickButton lowerElevator;
   public JoystickButton stab;
   public JoystickButton unStab;
+  public JoystickButton pivotHigh;
+  public JoystickButton pivotLow;
+
 	
 	public OI() {
 		xbox = new XboxController(0);
@@ -36,6 +39,11 @@ public class OI {
 		stab.whileHeld(new StabbyManualStab());
 		unStab = new JoystickButton(xbox, 2);
 		unStab.whileHeld(new StabbyManualUnstab());
+
+		pivotHigh = new JoystickButton(xbox, 3);
+		pivotHigh.whileHeld(new PivotForwardManual());
+		pivotLow = new JoystickButton(xbox, 4);
+		pivotLow.whileHeld(new PivotReverseManual());
 
 
 		SmartDashboard.putData("Test Encoder", new TestEncoder());

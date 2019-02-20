@@ -6,7 +6,20 @@ import edu.wpi.first.wpilibj.XboxController;
 public class XboxControllerUtil {
 	
 	XboxController xbox = Robot.m_oi.xbox;
-	
+
+	enum XboxButton {
+		A,
+		B,
+		X,
+		Y,
+		LB,
+		RB,
+		BACK,
+		START,
+		L3,
+		R3
+	}
+
 	public double get(String joy) {
 		if (joy.equals("A"))
 			return 1;
