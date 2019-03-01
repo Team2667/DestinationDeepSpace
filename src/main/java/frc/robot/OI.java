@@ -49,6 +49,8 @@ public class OI {
 		SmartDashboard.putData("Test Encoder", new TestEncoder());
 		SmartDashboard.putData("ElevatorNext", new ElevatorNext());
 		SmartDashboard.putData("ElevatorPrev", new ElevatorPrev());
+		SmartDashboard.putData("StabbyNext", new StabbyNextStage());
+		SmartDashboard.putData("StabbyPrev", new StabbyPrevStage());
 		SmartDashboard.putData("Reset Spark Max Encoders", new ResetSparkEncoders());
 		
 
