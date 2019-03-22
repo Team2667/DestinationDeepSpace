@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -16,12 +17,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class PanelRelease extends Subsystem {
   
-  public DoubleSolenoid topSol = new DoubleSolenoid(1, 2);
+  //public DoubleSolenoid topSol = new DoubleSolenoid(8, 2, 1);
+  public Solenoid sol1 = new Solenoid(8,1);
+  //public Solenoid sol2 = new Solenoid(8,2);
   public DoubleSolenoid botSol = new DoubleSolenoid(3, 4);
   public Compressor control = new Compressor(8);
 
   public PanelRelease() {
     control.setClosedLoopControl(true);
+    sol1.set(false);
   }
   
   public void setClosedLoopControl(boolean val)  {
@@ -29,11 +33,14 @@ public class PanelRelease extends Subsystem {
   }
 
   public void forwardTop() {
-    topSol.set(DoubleSolenoid.Value.kForward);
+    //topSol.set(DoubleSolenoid.Value.kForward);
+    sol1.set(true);
+    //sol2.set(false);
   }
 
   public void backTop() {
-    topSol.set(DoubleSolenoid.Value.kReverse);
+    //topSol.set(DoubleSolenoid.Value.kReverse);
+    sol1.set(false);
   }
 
   public void forwardBot() {
@@ -45,8 +52,8 @@ public class PanelRelease extends Subsystem {
   }
 
   public void stop() {
-    topSol.set(DoubleSolenoid.Value.kOff);
-    botSol.set(DoubleSolenoid.Value.kOff);
+    //topSol.set(DoubleSolenoid.Value.kOff);
+    //botSol.set(DoubleSolenoid.Value.kOff);
   }
 
   @Override

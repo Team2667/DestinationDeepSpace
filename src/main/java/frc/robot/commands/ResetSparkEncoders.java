@@ -20,8 +20,8 @@ public class ResetSparkEncoders extends Command {
   @Override
   protected void initialize() {
     Robot.m_lift.resetPos();
-    Robot.m_pivot.resetPos();
-    Robot.m_stabby.resetPos();
+    //Robot.m_pivot.resetPos();
+    //Robot.m_stabby.resetPos();
   }
 
   // Called repeatedly when this Command is scheduled to run

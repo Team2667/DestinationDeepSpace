@@ -11,6 +11,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class ElevatorNext extends Command {
+
+  private int temp = 0;
+
   public ElevatorNext() {
     requires(Robot.m_lift);
   }
@@ -18,18 +21,20 @@ public class ElevatorNext extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    temp = 0;
     Robot.m_lift.nextStage();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    temp++;
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.m_lift.isAtNextStage();
+    return (Robot.m_lift.isAtNextStage() || (Robot.m_lift.getVelocity() == 0 && temp > 10));
   }
 
   // Called once after isFinished returns true

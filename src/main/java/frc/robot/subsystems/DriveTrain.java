@@ -22,7 +22,7 @@ public class DriveTrain extends Subsystem {
   DifferentialDrive driveTrain = RobotMap.driveTrain;
 
   public void arcadeDrive(XboxController joy) {
-    driveTrain.arcadeDrive(joy.getX(XboxController.Hand.kLeft), joy.getY(XboxController.Hand.kLeft));
+    driveTrain.arcadeDrive(joy.getX(XboxController.Hand.kLeft), -joy.getY(XboxController.Hand.kLeft));
   }
 
   public void arcadeDrive(double mag, double turn) {

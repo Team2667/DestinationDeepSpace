@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -29,6 +30,7 @@ public class Robot extends TimedRobot {
   public static PanelRelease m_panel;
   public static Wrist m_wrist;
   public static Stabby m_stabby;
+  public static PowerDistributionPanel m_pdp;
   
 
   Command m_autonomousCommand;
@@ -44,7 +46,7 @@ public class Robot extends TimedRobot {
     //Put All Subsystem that ARE NOT Drive Train Above OI, Put Drive Train BELOW OI
     m_stabby = new Stabby();
     m_wrist = new Wrist();
-    //m_panel = new PanelRelease();
+    m_panel = new PanelRelease();
     m_pivot = new Pivot();
     m_lift = new Elevator();
     m_oi = new OI();

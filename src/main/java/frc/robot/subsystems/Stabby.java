@@ -9,6 +9,8 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import com.revrobotics.*;
+import com.revrobotics.CANDigitalInput.LimitSwitchPolarity;
+
 import frc.robot.PID.*;
 
 /**
@@ -31,7 +33,7 @@ public class Stabby extends Subsystem {
     }
 
     public void extendIndef() {
-        stabby.set(1);
+        stabby.set(.02);
       }
     
       public void extendIndef(double speed) {
@@ -39,12 +41,25 @@ public class Stabby extends Subsystem {
       }
     
       public void retractIndef() {
-        stabby.set(-1);
+        stabby.set(-.02);
       }
     
       public void retractIndef(double speed) {
         stabby.set(-speed);
       }
+
+      public boolean getForwardLimitSwitch() {
+        return stabby.getForwardLimitSwitch(LimitSwitchPolarity.kNormallyOpen).isLimitSwitchEnabled();
+      }
+
+      public boolean getReverseLimitSwitch() {
+        return stabby.getReverseLimitSwitch(LimitSwitchPolarity.kNormallyOpen).isLimitSwitchEnabled();
+      }
+
+      public double getVelocity() {
+        return stabbyEncoder.getVelocity();
+      }
+
 
       public void nextStage() {
         PIDData temp = posData.nextPos();

@@ -25,8 +25,8 @@ public class Elevator extends Subsystem {
   public Elevator() {
     PIDData[] array = new PIDData[3];
     array[0] = new PIDData(0);
-    array[1] = new PIDData(80.02); 
-    array[2] = new PIDData (423);
+    array[1] = new PIDData(-16.45236); 
+    array[2] = new PIDData (-80.81025);
     
     posData = new PIDSubsystemPositions(array);
     test.getEncoder().setPosition(0);
@@ -34,7 +34,7 @@ public class Elevator extends Subsystem {
   }
 
   public void raiseIndef() {
-    test.set(1);
+    test.set(.25);
   }
 
   public void raiseIndef(double speed) {
@@ -42,7 +42,7 @@ public class Elevator extends Subsystem {
   }
 
   public void lowerIndef() {
-    test.set(-1);
+    test.set(-.25);
   }
 
   public void lowerIndef(double speed) {
@@ -102,6 +102,10 @@ public class Elevator extends Subsystem {
 
   public void resetPos() {
     test.getEncoder().setPosition(0);
+  }
+
+  public double getVelocity() {
+    return test.getEncoder().getVelocity();
   }
 
   @Override

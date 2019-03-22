@@ -25,7 +25,7 @@ public class Pivot extends Subsystem {
     }
 
     public void raiseIndef() {
-        pivot.set(1);
+        pivot.set(.5);
       }
     
       public void raiseIndef(double speed) {
@@ -33,7 +33,7 @@ public class Pivot extends Subsystem {
       }
     
       public void lowerIndef() {
-        pivot.set(-1);
+        pivot.set(-.5);
       }
     
       public void lowerIndef(double speed) {

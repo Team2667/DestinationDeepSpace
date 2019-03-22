@@ -10,15 +10,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class StabbyNextStage extends Command {
-  public StabbyNextStage() {
-    requires(Robot.m_stabby);
+public class PanelOff extends Command {
+  public PanelOff() {
+    requires(Robot.m_panel);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_stabby.nextStage();
+    Robot.m_panel.stop();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -29,13 +29,12 @@ public class StabbyNextStage extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.m_stabby.isAtNextStage();
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_stabby.setNextStage();
   }
 
   // Called when another command which requires one or more of the same

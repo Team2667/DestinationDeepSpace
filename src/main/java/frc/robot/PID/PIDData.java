@@ -4,8 +4,8 @@ public class PIDData{
     private double pValue = .1;
     private double iValue = 0;
     private double dValue = 1;
-    private double minPower = -1;
-    private double maxPower = 1;
+    private double minPower = -.5;
+    private double maxPower = .5;
     private double position;
 
     public PIDData(double position){

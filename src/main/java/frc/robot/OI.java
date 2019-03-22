@@ -25,6 +25,8 @@ public class OI {
   public JoystickButton unStab;
   public JoystickButton pivotHigh;
   public JoystickButton pivotLow;
+  public JoystickButton nextStage;
+  public JoystickButton prevStage;
 
 	
 	public OI() {
@@ -45,12 +47,20 @@ public class OI {
 		pivotLow = new JoystickButton(xbox, 4);
 		pivotLow.whileHeld(new PivotReverseManual());
 
+		nextStage = new JoystickButton(xbox, 8);
+		nextStage.whileHeld(new ElevatorNext());
+		prevStage = new JoystickButton(xbox, 7);
+		prevStage.whileHeld(new ElevatorPrev());
 
 		SmartDashboard.putData("Test Encoder", new TestEncoder());
-		SmartDashboard.putData("ElevatorNext", new ElevatorNext());
-		SmartDashboard.putData("ElevatorPrev", new ElevatorPrev());
-		SmartDashboard.putData("StabbyNext", new StabbyNextStage());
-		SmartDashboard.putData("StabbyPrev", new StabbyPrevStage());
+		SmartDashboard.putData("Elevator Next", new ElevatorNext());
+		SmartDashboard.putData("Elevator Prev", new ElevatorPrev());
+		SmartDashboard.putData("Stabby Next", new StabbyNextStage());
+		SmartDashboard.putData("Stabby Prev", new StabbyPrevStage());
+		SmartDashboard.putData("Close Panel", new ClosePanel());
+		SmartDashboard.putData("Open Panel", new OpenPanel());
+		SmartDashboard.putData("Panel Off", new PanelOff());
+		SmartDashboard.putData("Test Stabby Limit Switch", new TestLimitSwitchStabby());
 		SmartDashboard.putData("Reset Spark Max Encoders", new ResetSparkEncoders());
 		
 

@@ -19,7 +19,7 @@ public class OpenPanel extends Command {
   @Override
   protected void initialize() {
     Robot.m_panel.backTop();
-    Robot.m_panel.forwardBot();
+    //Robot.m_panel.backBot();
   }
 
   // Called repeatedly when this Command is scheduled to run
