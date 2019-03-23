@@ -15,6 +15,7 @@ public class NextStageAll extends CommandGroup {
    */
   public NextStageAll() {
     addParallel(new ElevatorNext());
+    addParallel(new PivotNextStage());
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());

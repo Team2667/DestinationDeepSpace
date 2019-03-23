@@ -9,13 +9,15 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class PrevStageAll extends CommandGroup {
+public class DeliverPanel extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public PrevStageAll() {
-    addParallel(new ElevatorNext());
-    addParallel(new PivotPrevStage());
+  public DeliverPanel() {
+    addSequential(new StabbyNextStage());
+    addSequential(new ClosePanel());
+    addSequential(new StabbyPrevStage());
+
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());

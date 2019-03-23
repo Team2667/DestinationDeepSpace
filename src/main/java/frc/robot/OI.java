@@ -48,9 +48,9 @@ public class OI {
 		pivotLow.whileHeld(new PivotReverseManual());
 
 		nextStage = new JoystickButton(xbox, 8);
-		nextStage.whileHeld(new ElevatorNext());
+		nextStage.whenPressed(new NextStageAll());
 		prevStage = new JoystickButton(xbox, 7);
-		prevStage.whileHeld(new ElevatorPrev());
+		prevStage.whenPressed(new PrevStageAll());
 
 		SmartDashboard.putData("Test Encoder", new TestEncoder());
 		SmartDashboard.putData("Elevator Next", new ElevatorNext());

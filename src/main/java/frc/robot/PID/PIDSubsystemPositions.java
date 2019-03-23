@@ -50,6 +50,10 @@ public class PIDSubsystemPositions {
         } 
     }
 
+    public int getPos() {
+        return pos;
+    }
+
 
 
 

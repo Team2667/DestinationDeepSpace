@@ -24,8 +24,8 @@ public class Elevator extends Subsystem {
 
   public Elevator() {
     PIDData[] array = new PIDData[3];
-    array[0] = new PIDData(0);
-    array[1] = new PIDData(-16.45236); 
+    array[0] = new PIDData(-16.45236);
+    array[1] = new PIDData(-80.81025); 
     array[2] = new PIDData (-80.81025);
     
     posData = new PIDSubsystemPositions(array);
@@ -98,6 +98,10 @@ public class Elevator extends Subsystem {
 
   public double getPos() {
     return test.getEncoder().getPosition();
+  }
+
+  public int getStage() {
+    return posData.getPos();
   }
 
   public void resetPos() {
