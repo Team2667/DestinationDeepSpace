@@ -34,7 +34,7 @@ public class Elevator extends Subsystem {
   }
 
   public void raiseIndef() {
-    test.set(.25);
+    test.set(.35);
   }
 
   public void raiseIndef(double speed) {
@@ -42,7 +42,7 @@ public class Elevator extends Subsystem {
   }
 
   public void lowerIndef() {
-    test.set(-.25);
+    test.set(-.35);
   }
 
   public void lowerIndef(double speed) {
@@ -51,6 +51,15 @@ public class Elevator extends Subsystem {
  
   public void nextStage() {
     PIDData temp = posData.nextPos();
+    elevatorController.setP(temp.getP());
+    elevatorController.setI(temp.getI());
+    elevatorController.setD(temp.getD());
+    elevatorController.setOutputRange(temp.getMinPower(), temp.getMaxPower());
+    elevatorController.setReference(temp.getPosition(), ControlType.kPosition);
+  }
+
+  public void currentStage() {
+    PIDData temp = posData.currentPos();
     elevatorController.setP(temp.getP());
     elevatorController.setI(temp.getI());
     elevatorController.setD(temp.getD());
@@ -91,6 +100,11 @@ public class Elevator extends Subsystem {
     posData.setPrevPos();
   }
 
+  public void cheatStop() {
+    double temp = test.getEncoder().getPosition();
+    elevatorController.setReference(temp, ControlType.kPosition);
+  }
+
 
   public void stop(){
     test.set(0);
@@ -110,6 +124,15 @@ public class Elevator extends Subsystem {
 
   public double getVelocity() {
     return test.getEncoder().getVelocity();
+  }
+
+  public void setFirstStage() {
+    posData.setFirstPos();
+  }
+
+  public void moveRotation(double rotations) {
+    elevatorController.setOutputRange(-.5, .5);
+    elevatorController.setReference(rotations, ControlType.kPosition);
   }
 
   @Override

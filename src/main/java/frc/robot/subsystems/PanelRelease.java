@@ -18,14 +18,17 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class PanelRelease extends Subsystem {
   
   //public DoubleSolenoid topSol = new DoubleSolenoid(8, 2, 1);
-  public Solenoid sol1 = new Solenoid(8,1);
+  public Solenoid sol1;
   //public Solenoid sol2 = new Solenoid(8,2);
-  public DoubleSolenoid botSol = new DoubleSolenoid(3, 4);
-  public Compressor control = new Compressor(8);
+  public DoubleSolenoid botSol;
+  public Compressor control;
 
   public PanelRelease() {
-    control.setClosedLoopControl(true);
-    sol1.set(false);
+    //sol1 = new Solenoid(8,1);
+    //botSol = new DoubleSolenoid(3, 4);
+    //control = new Compressor(8);
+    //control.setClosedLoopControl(true);
+    //sol1.set(false);
   }
   
   public void setClosedLoopControl(boolean val)  {

@@ -30,6 +30,10 @@ public class PIDSubsystemPositions {
         }
     }
 
+    public PIDData currentPos() {
+        return dataForPositions.get(pos);
+    }
+
     public PIDData prevPos(){
         if (pos != 0) {
             return dataForPositions.get(pos - 1);
@@ -48,6 +52,10 @@ public class PIDSubsystemPositions {
         if (pos != 0) {
             pos--;
         } 
+    }
+
+    public void setFirstPos() {
+        pos = 0;
     }
 
     public int getPos() {

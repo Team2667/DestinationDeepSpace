@@ -27,6 +27,8 @@ public class OI {
   public JoystickButton pivotLow;
   public JoystickButton nextStage;
   public JoystickButton prevStage;
+  public JoystickButton reset;
+  public JoystickButton init;
 
 	
 	public OI() {
@@ -51,6 +53,11 @@ public class OI {
 		nextStage.whenPressed(new NextStageAll());
 		prevStage = new JoystickButton(xbox, 7);
 		prevStage.whenPressed(new PrevStageAll());
+
+		reset = new JoystickButton(xbox, 9);
+		reset.whenPressed(new ResetSparkEncoders());
+		init = new JoystickButton(xbox, 10);
+		init.whenPressed(new InitialStageAll());
 
 		SmartDashboard.putData("Test Encoder", new TestEncoder());
 		SmartDashboard.putData("Elevator Next", new ElevatorNext());

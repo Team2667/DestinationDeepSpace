@@ -10,11 +10,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ElevatorNext extends Command {
+public class ElevatorInit extends Command {
 
-  private int temp = 0;
+  int temp = 0;
 
-  public ElevatorNext() {
+  public ElevatorInit() {
     requires(Robot.m_lift);
   }
 
@@ -22,7 +22,7 @@ public class ElevatorNext extends Command {
   @Override
   protected void initialize() {
     temp = 0;
-    Robot.m_lift.nextStage();
+    Robot.m_lift.raiseIndef();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -34,23 +34,19 @@ public class ElevatorNext extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return (Robot.m_lift.isAtNextStage() || (Robot.m_lift.getVelocity() == 0 && temp > 10));
+    return (Robot.m_lift.getVelocity() == 0 && temp > 10);
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_lift.setNextStage();
-    if (Robot.m_lift.getVelocity() < .1 && temp > 10) {
-      Robot.m_lift.stop();
-      Robot.m_lift.cheatStop();
-    }
+    Robot.m_lift.resetPos();
+    Robot.m_lift.setFirstStage();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    end();
   }
 }

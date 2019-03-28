@@ -16,9 +16,10 @@ public class Pivot extends Subsystem {
 
     public Pivot() {
         PIDData[] array = new PIDData[3];
-        array[0] = new PIDData(56.19102);
-        array[1] = new PIDData(56.19102); 
-        array[2] = new PIDData(25);
+        //array[0] = new PIDData(56.19102);
+        array[0] = new PIDData(53.976524353027344); 
+        array[1] = new PIDData(53.976524353027344); 
+        array[2] = new PIDData(40);
 
         posData = new PIDSubsystemPositions(array);
         pivotEncoder.setPosition(0.0);
@@ -42,6 +43,15 @@ public class Pivot extends Subsystem {
 
       public void nextStage() {
         PIDData temp = posData.nextPos();
+        pivotPID.setP(temp.getP());
+        pivotPID.setI(temp.getI());
+        pivotPID.setD(temp.getD());
+        pivotPID.setOutputRange(temp.getMinPower(), temp.getMaxPower());
+        pivotPID.setReference(temp.getPosition(), ControlType.kPosition);
+      }
+
+      public void currentStage() {
+        PIDData temp = posData.currentPos();
         pivotPID.setP(temp.getP());
         pivotPID.setI(temp.getI());
         pivotPID.setD(temp.getD());
@@ -93,6 +103,19 @@ public class Pivot extends Subsystem {
 
       public void resetPos() {
         pivot.getEncoder().setPosition(0);
+      }
+
+      public void moveRotation(double rotations) {
+        pivotPID.setOutputRange(-.5, .5);
+        pivotPID.setReference(rotations, ControlType.kPosition);
+      }
+
+      public void setFirstStage() {
+        posData.setFirstPos();
+      }
+
+      public double getVelocity() {
+        return pivot.getEncoder().getVelocity();
       }
   
 

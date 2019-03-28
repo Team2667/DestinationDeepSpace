@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.commands.MatchStart;
 import frc.robot.subsystems.*;
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -52,8 +53,9 @@ public class Robot extends TimedRobot {
     m_oi = new OI();
     m_drive = new DriveTrain();
 
-    // chooser.addOption("My Auto", new MyAutoCommand());
-    SmartDashboard.putData("Auto mode", m_chooser);
+    m_chooser.setDefaultOption("big pp", new MatchStart());
+    
+    SmartDashboard.putData("small pp", m_chooser);
   }
 
   /**
@@ -66,6 +68,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    SmartDashboard.putNumber("Elevator Position", m_lift.getPos());
+    SmartDashboard.putNumber("Pivot Position", m_pivot.getPos());
+    SmartDashboard.putNumber("Stabby Position", m_stabby.getPos());
+    SmartDashboard.putNumber("Wrist Position", m_wrist.getPos());
   }
 
   /**
@@ -95,18 +101,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-   // m_autonomousCommand = m_chooser.getSelected();
-
-    /*
-     * String autoSelected = SmartDashboard.getString("Auto Selector",
-     * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-     * = new MyAutoCommand(); break; case "Default Auto": default:
-     * autonomousCommand = new ExampleCommand(); break; }
-     */
+    
+    m_autonomousCommand = m_chooser.getSelected();
 
     // schedule the autonomous command (example)
-    /* if (m_autonomousCommand != null) {
-      m_autonomousCommand.start(); */
+     if (m_autonomousCommand != null) 
+      m_autonomousCommand.start();
     }
   
 
@@ -137,9 +137,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     ///RobotMap.EncoderCounter();
-    SmartDashboard.putNumber("Elevator Position", m_lift.getPos());
-    SmartDashboard.putNumber("Pivot Position", m_pivot.getPos());
-    SmartDashboard.putNumber("Stabby Position", m_stabby.getPos());
+    
     Scheduler.getInstance().run();
   }
 

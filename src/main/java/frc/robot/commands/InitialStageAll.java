@@ -12,12 +12,9 @@ import frc.robot.Robot;
 
 public class InitialStageAll extends CommandGroup {
 
-  protected int stage;
-
   public InitialStageAll() {
-    stage = Robot.m_lift.getStage();
-    for (int x = stage; x == 0; x--) {
-      addSequential(new PrevStageAll());
-    }
+    addParallel(new ElevatorInit());
+    addParallel(new PivotInit());
+    
   }
 }
